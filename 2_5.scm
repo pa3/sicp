@@ -1,0 +1,11 @@
+(define (mycons a b) 
+  (* (expt 2 a) (expt 3 b)))
+(define (mycar pair)
+  (times-divides pair 2))
+(define (mycdr pair)
+  (times-divides pair 3))
+
+(define (times-divides x y)
+  (if (= (remainder x y) 0)
+      (+ 1 (times-divides (/ x y) y))
+      0))
