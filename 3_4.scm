@@ -1,0 +1,27 @@
+(define (make-account balance password)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount)) balance)
+
+
+  (let ((wrong-password-counter 0))
+    (define max-password-attempts 7)
+    (define (check-password p)
+      (if (not (eq? p password))
+          (begin (set! wrong-password-counter (+ 1 wrong-password-counter))
+                 (if (> wrong-password-counter max-password-attempts)
+                     (call-the-cops)
+                     (error "Incorrect password!")))
+          (set! wrong-password-counter 0)))
+    (define (dispatch p m)
+      (check-password p)
+      (cond ((eq? m 'withdraw) withdraw)
+            ((eq? m 'deposit) deposit)
+            (else (error "Unknown request: MAKE-ACCOUNT"
+                         m))))
+    
+    dispatch))

@@ -1,3 +1,4 @@
+
 ;; still O(n) compared to 2.59
 
 (define (element-of-set? x set)
@@ -20,3 +21,6 @@
         ((element-of-set? (car set1) set2) 
          (cons (car set1) (intersection-set (cdr set1) set2)))
         (else (intersection-set (cdr set1) set2))))
+
+
+(union-set '(1 2 3) '(2 3 4))
