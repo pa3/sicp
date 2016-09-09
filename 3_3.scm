@@ -7,10 +7,10 @@
   (define (deposit amount)
     (set! balance (+ balance amount))
     balance)
+  (define (wrong-password amount) "Incorrect password!")
   (define (dispatch p m)
-    (cond ((not (eq? p password)) (error "Incorrect password!"))
+    (cond ((not (equal? p password)) wrong-password)
           ((eq? m 'withdraw) withdraw)
           ((eq? m 'deposit) deposit)
-          (else (error "Unknown request: MAKE-ACCOUNT"
-                       m))))
+          (else (error "Unknown request" m))))
   dispatch)
