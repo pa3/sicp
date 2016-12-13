@@ -1,0 +1,11 @@
+(define (count-pairs x)
+  (let ((visited '()))
+    (define (skip-visited y)
+      (cond ((memq y visited) 0)
+            ((not (pair? y)) 0)
+            (else 
+             (set! visited (cons y visited))
+             (+ (skip-visited (car y))
+                (skip-visited (cdr y))
+                1))))
+    (skip-visited x)))
